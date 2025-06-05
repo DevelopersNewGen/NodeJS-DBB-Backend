@@ -4,21 +4,26 @@ import { dbConnection } from "./mongo.js";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import createDefaultAdmin from "./adminDefault.js";
 import apiLimiter from "../src/middlewares/rate-limit-validator.js";
+import authRoutes from "../src/auth/auth.routes.js";
 
 const middlewares = (app) => {
+    app.use(express.urlencoded({ extended: false }));
+    app.use(express.json());
     app.use(helmet());
     app.use(morgan("dev"));
     app.use(apiLimiter);
 };
 
 const routes = (app) => {
-    
+    app.use("/DBB/v1/auth", authRoutes);
 };
 
 const conectarDB = async () => {
     try {
         await dbConnection();
+        await createDefaultAdmin();
     } catch (err) {
         console.log(`Database connection failed: ${err}`);
         process.exit(1);
