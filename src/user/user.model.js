@@ -12,11 +12,12 @@ const userSchema = Schema({
         unique: true,
         maxLength: [20, "Username cannot exceed 20 characters"]
     },
-    accountNumber: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    accounts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Accounts'
+        }
+    ],
     dpi: {
         type: String,
         required: [true, "DPI is required"],
@@ -53,6 +54,12 @@ const userSchema = Schema({
         default: "CLIENT_ROLE",
         enum: ["ADMIN_ROLE", "CLIENT_ROLE"]
     },
+    favs: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Accounts'
+        }
+    ],
     status: {
         type: Boolean,
         default: true
