@@ -9,11 +9,7 @@ export const validatorLogin = [
     body("emailOrUsername")
         .notEmpty().withMessage("Email or Username is mandatory"), 
     body("password")
-        .notEmpty().withMessage("The password is required")
-        .isStrongPassword({
-            minLength: 6,
-            minUppercase: 1
-        }).withMessage("The password must contain at least 6 characters"),
+        .notEmpty().withMessage("The password is required"),
     validateField,
     handleErrors
 ];
@@ -23,7 +19,7 @@ export const createUserValidator = [
     hasRoles("ADMIN_ROLE"), 
     body("name")
         .notEmpty().withMessage("Name is required")
-        .isLength({ max: 35 }).withMessage("Name cannot exceed 35 characters"),
+        .isLength({ max: 50 }).withMessage("Name cannot exceed 35 characters"),
     body("username")
         .notEmpty().withMessage("Username is required")
         .isLength({ max: 20 }).withMessage("Username cannot exceed 20 characters").custom(usernameExists),

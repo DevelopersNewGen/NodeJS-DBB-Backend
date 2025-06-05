@@ -7,6 +7,7 @@ import morgan from "morgan";
 import createDefaultAdmin from "./adminDefault.js";
 import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js";
+import userRoutes from "../src/user/user.routes.js";
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -18,6 +19,7 @@ const middlewares = (app) => {
 
 const routes = (app) => {
     app.use("/DBB/v1/auth", authRoutes);
+    app.use("/DBB/v1/user", userRoutes);
 };
 
 const conectarDB = async () => {

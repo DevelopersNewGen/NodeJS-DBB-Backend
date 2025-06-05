@@ -17,7 +17,6 @@ export const createUser = async (req, res) => {
         const newUser = new User({
             name,
             username,
-            accountNumber,
             dpi,
             address,
             cellphone,
@@ -41,3 +40,4 @@ export const createUser = async (req, res) => {
         });
     }
 };
+
