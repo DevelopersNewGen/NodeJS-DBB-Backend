@@ -101,7 +101,7 @@ export const getUserById = async (req, res) => {
 export const updateUserById = async (req, res) => {
     try {
         const { uid } = req.params;  
-        const { name, username, email, address, cellphone, jobName, monthlyIncome } = req.body;
+        const { name, username, email, address, cellphone, jobName, monthlyIncome, role } = req.body;
 
         const updatedUser = await User.findByIdAndUpdate(
             uid, 
@@ -113,7 +113,8 @@ export const updateUserById = async (req, res) => {
                     address,
                     cellphone,
                     jobName,
-                    monthlyIncome
+                    monthlyIncome,
+                    role
                 }
             }, 
             { new: true, runValidators: true }
@@ -178,7 +179,6 @@ export const deleteUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         const { usuario } = req;  
-        console.log(usuario);
         const { name, username, email, address, cellphone, jobName, monthlyIncome } = req.body;
 
         const updatedUser = await User.findByIdAndUpdate(
