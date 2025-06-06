@@ -33,3 +33,15 @@ export const validateMonthlyIncome = async (monthlyIncome = 0) => {
         throw new Error("Monthly income must be greater than Q100");
     }
 };
+
+export const isClient = async (uid = " ") =>{
+    const existe = await User.findById(uid)
+    console.log(existe)
+    if(!existe){
+        throw new Error("The client does not exist")
+    }
+
+    if(existe.role !== "CLIENT_ROLE" ){
+        throw new Error("Is not a client")
+    }
+}
