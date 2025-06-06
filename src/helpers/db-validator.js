@@ -36,7 +36,6 @@ export const validateMonthlyIncome = async (monthlyIncome = 0) => {
 
 export const isClient = async (uid = " ") =>{
     const existe = await User.findById(uid)
-    console.log(existe)
     if(!existe){
         throw new Error("The client does not exist")
     }

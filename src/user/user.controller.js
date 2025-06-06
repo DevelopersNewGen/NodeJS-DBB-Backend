@@ -127,13 +127,6 @@ export const updateUserById = async (req, res) => {
             });
         }
 
-        if (updatedUser.role === "ADMIN_ROLE") {
-            return res.status(403).json({
-                success: false,
-                message: "You cannot edit an admin user"
-            });
-        }
-
         return res.status(200).json({
             success: true,
             message: "User updated successfully",
