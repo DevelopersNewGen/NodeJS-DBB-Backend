@@ -14,7 +14,7 @@ const accountsSchema = Schema({
   accountType: {
     type: String,
     required: [true, "Account type is required"],
-    enum: ["MONETARIA", "AHORRO", "OTRO"],
+    enum: ["MONETARY", "SAVER", "OTHER"],
   },
   status: {
     type: Boolean,
