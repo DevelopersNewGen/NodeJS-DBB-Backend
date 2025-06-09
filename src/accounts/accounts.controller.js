@@ -26,7 +26,7 @@ export const createAccount = async (req, res) => {
 
     await newAccount.save();
 
-    user.accounts.push(newAccount.aid);
+    user.accounts.push(newAccount.id);
     await user.save();
 
     res.status(201).json({

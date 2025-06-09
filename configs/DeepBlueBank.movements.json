@@ -1,0 +1,184 @@
+[{
+  "_id": {
+    "$oid": "684618f44ee51b4003316646"
+  },
+  "amount": 300,
+  "type": "DEPOSIT",
+  "description": "",
+  "balanceAfter": -20,
+  "originAccount": null,
+  "destinationAccount": {
+    "$oid": "684618064ee51b400331660f"
+  },
+  "status": "REVERTED",
+  "date": {
+    "$date": "2025-06-08T23:12:52.547Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684619054ee51b400331664b"
+  },
+  "amount": 360,
+  "type": "DEPOSIT",
+  "description": "",
+  "balanceAfter": 825.99,
+  "originAccount": null,
+  "destinationAccount": {
+    "$oid": "684618174ee51b4003316615"
+  },
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:13:09.661Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684619114ee51b4003316650"
+  },
+  "amount": 1100,
+  "type": "DEPOSIT",
+  "description": "",
+  "balanceAfter": 1460,
+  "originAccount": null,
+  "destinationAccount": {
+    "$oid": "684618574ee51b4003316627"
+  },
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:13:21.656Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684619404ee51b4003316655"
+  },
+  "amount": 8200,
+  "type": "DEPOSIT",
+  "description": "",
+  "balanceAfter": 23400.5,
+  "originAccount": null,
+  "destinationAccount": {
+    "$oid": "684617fb4ee51b4003316609"
+  },
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:14:08.859Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684619604ee51b400331665a"
+  },
+  "amount": 600,
+  "type": "WITHDRAWAL",
+  "description": "",
+  "balanceAfter": 7220,
+  "originAccount": {
+    "$oid": "684617d84ee51b40033165fd"
+  },
+  "destinationAccount": null,
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:14:40.017Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6846196d4ee51b400331665f"
+  },
+  "amount": 1000,
+  "type": "WITHDRAWAL",
+  "description": "",
+  "balanceAfter": 280,
+  "originAccount": {
+    "$oid": "684618064ee51b400331660f"
+  },
+  "destinationAccount": null,
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:14:53.537Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684619774ee51b4003316664"
+  },
+  "amount": 300,
+  "type": "WITHDRAWAL",
+  "description": "",
+  "balanceAfter": 2900,
+  "originAccount": {
+    "$oid": "6846181e4ee51b400331661b"
+  },
+  "destinationAccount": null,
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:15:03.359Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684619884ee51b400331666b"
+  },
+  "amount": 400,
+  "type": "WITHDRAWAL",
+  "description": "",
+  "balanceAfter": 1060,
+  "originAccount": {
+    "$oid": "684618574ee51b4003316627"
+  },
+  "destinationAccount": null,
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:15:20.738Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68461a5f4ee51b400331667c"
+  },
+  "amount": 2000,
+  "type": "TRANSFER_OUT",
+  "description": "Pago prestamo",
+  "balanceAfter": 21400.5,
+  "originAccount": {
+    "$oid": "684617fb4ee51b4003316609"
+  },
+  "destinationAccount": {
+    "$oid": "684618064ee51b400331660f"
+  },
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:18:55.840Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68461a5f4ee51b400331667e"
+  },
+  "amount": 2000,
+  "type": "TRANSFER_IN",
+  "description": "Pago prestamo",
+  "balanceAfter": 1980,
+  "originAccount": {
+    "$oid": "684617fb4ee51b4003316609"
+  },
+  "destinationAccount": {
+    "$oid": "684618064ee51b400331660f"
+  },
+  "status": "COMPLETED",
+  "date": {
+    "$date": "2025-06-08T23:18:55.843Z"
+  },
+  "__v": 0
+}]
