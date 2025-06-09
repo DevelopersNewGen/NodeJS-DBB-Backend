@@ -18,7 +18,7 @@ const productSchema = Schema({
     }
 });
 
-userSchema.methods.toJSON = function () {
+productSchema.methods.toJSON = function () {
     const { password, _id, ...product } = this.toObject();
     product.uid = _id;
     return product;
