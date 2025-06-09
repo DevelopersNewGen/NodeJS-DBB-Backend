@@ -9,6 +9,7 @@ import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import userRoutes from "../src/user/user.routes.js";
 import accountsRoutes from "../src/accounts/accounts.routes.js";
+import productRoutes from "../src/product/product.routes.js";
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -22,6 +23,7 @@ const routes = (app) => {
   app.use("/DBB/v1/auth", authRoutes);
   app.use("/DBB/v1/user", userRoutes);
   app.use("/DBB/v1/accounts", accountsRoutes);
+  app.use("/DBB/v1/products", productRoutes);
 };
 
 const conectarDB = async () => {
