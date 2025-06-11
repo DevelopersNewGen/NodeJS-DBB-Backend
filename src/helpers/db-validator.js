@@ -1,4 +1,5 @@
 import User from "../user/user.model.js";
+import Product from "../product/product.model.js";
 
 export const emailExists = async (email = "") => {
   const existe = await User.findOne({ email });
@@ -42,5 +43,12 @@ export const isClient = async (uid = " ") => {
 
   if (existe.role !== "CLIENT_ROLE") {
     throw new Error("Is not a client");
+  }
+};
+
+export const productExists = async (id = "") => {
+  const existe = await Product.findById(id);
+  if (!existe) {
+    throw new Error("The product does not exist");
   }
 };
