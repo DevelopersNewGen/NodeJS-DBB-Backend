@@ -51,20 +51,3 @@ export const deleteProduct = async (req, res) => {
         res.status(500).json({ message: "Error deleting product", error });
     }
 };
-
-export const buyProduct = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const product = await Product.findById(id);
-
-        if (!product) {
-            return res.status(404).json({ message: "Product not found" });
-        }
-        res.json({
-            message: "Product/service purchased successfully",
-            product
-        });
-    } catch (error) {
-        res.status(500).json({ message: "Error purchasing product", error });
-    }
-};

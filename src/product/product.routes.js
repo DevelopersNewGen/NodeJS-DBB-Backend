@@ -4,16 +4,14 @@ import {
     getAllProducts,
     getProductById,
     updateProduct,
-    deleteProduct,
-    buyProduct
+    deleteProduct
 } from "./product.controller.js";
 
 import {
     createProductValidator,
     updateProductValidator,
     deleteProductValidator,
-    getProductByIdValidator,
-    buyProductValidator 
+    getProductByIdValidator
 } from "../middlewares/product-validator.js";
 
 const router = Router();
@@ -23,6 +21,5 @@ router.get("/", getAllProducts);
 router.get("/:id", getProductByIdValidator, getProductById);
 router.put("/:id", updateProductValidator, updateProduct);
 router.delete("/:id", deleteProductValidator, deleteProduct);
-router.post("/buy/:id", buyProductValidator, buyProduct);
 export default router;
 

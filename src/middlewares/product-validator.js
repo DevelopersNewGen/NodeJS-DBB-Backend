@@ -58,11 +58,3 @@ export const getProductByIdValidator = [
     validateField,
     handleErrors
 ];
-export const buyProductValidator = [
-    validateJWT,
-    hasRoles("CLIENT_ROLE"), 
-    param("id").isMongoId().withMessage("The ID is not valid"),
-    param("id").custom(productExists),
-    validateField,
-    handleErrors
-];
