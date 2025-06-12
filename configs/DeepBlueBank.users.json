@@ -1,0 +1,178 @@
+[{
+  "_id": {
+    "$oid": "6846164e64300e100e071753"
+  },
+  "name": "Admin",
+  "username": "ADMINB",
+  "accounts": [],
+  "dpi": "0000000000000",
+  "address": "123 Admin St",
+  "cellphone": "1234567890",
+  "email": "admin@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$TPBwIYA4UBs9SrjS253p2Q$EFcckcYReS5WN60ZBUUrKXIh7pOLwdpRDoS2dh6Mnn4",
+  "jobName": "Admin",
+  "monthlyIncome": 101,
+  "role": "ADMIN_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684616b34ee51b40033165cb"
+  },
+  "name": "Luis Fernando Cabrera Díaz",
+  "username": "luisfd",
+  "accounts": [
+    {
+      "$oid": "684617c84ee51b40033165f7"
+    },
+    {
+      "$oid": "684617d84ee51b40033165fd"
+    },
+    {
+      "$oid": "684617e24ee51b4003316603"
+    }
+  ],
+  "dpi": "2765432180107",
+  "address": "7ma avenida zona 10, 9-34",
+  "cellphone": "50234567",
+  "email": "luis.cabrera@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$4supcHfmd9CVrwO8NrW/WQ$fyGkBbkcu/qcqcJWYlA/ay7LlAXNLQ10geN9bD+I+HM",
+  "jobName": "Desarrollador Web",
+  "monthlyIncome": 4700,
+  "role": "CLIENT_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "684616e14ee51b40033165d1"
+  },
+  "name": "Lucía Fernanda López Ramírez",
+  "username": "lulopez",
+  "accounts": [
+    {
+      "$oid": "684617fb4ee51b4003316609"
+    },
+    {
+      "$oid": "684618064ee51b400331660f"
+    }
+  ],
+  "dpi": "2637419200103",
+  "address": "4ta calle zona 1, 10-45",
+  "cellphone": "55123456",
+  "email": "lucia.lopezr@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$VuGKB8H1ikXzRLfsuJGeYg$NgvsoEOBPUkOBJudh18HmtGh/l4QqI3yEZbB5JfToso",
+  "jobName": "Diseñadora Gráfica",
+  "monthlyIncome": 3250,
+  "role": "CLIENT_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "684616f64ee51b40033165d7"
+  },
+  "name": "Carlos Eduardo Menchú Pérez",
+  "username": "cmenchu",
+  "accounts": [
+    {
+      "$oid": "684618174ee51b4003316615"
+    },
+    {
+      "$oid": "6846181e4ee51b400331661b"
+    },
+    {
+      "$oid": "684618294ee51b4003316621"
+    }
+  ],
+  "dpi": "1034567890101",
+  "address": "6ta avenida A zona 3, 21-10",
+  "cellphone": "56781234",
+  "email": "carlos.menchu@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$q/pCPlJpQ7slfd0lAkR6yw$HvkvIdfFGR2CayNZ6J5ZE6woHSMR34QNBH8jNPluTFU",
+  "jobName": "Contador",
+  "monthlyIncome": 4200,
+  "role": "CLIENT_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "684617094ee51b40033165dd"
+  },
+  "name": "María Alejandra Soto Ruiz",
+  "username": "masoto",
+  "accounts": [
+    {
+      "$oid": "684618574ee51b4003316627"
+    }
+  ],
+  "dpi": "2398745610104",
+  "address": "1ra calle zona 6, 4-56",
+  "cellphone": "45879632",
+  "email": "alejandra.soto@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$nluKZj50cf5mzkscASMCKw$5LiXibfn+A1pNM4e2axr+x6B2lbdxNZcWyP/sBH026Y",
+  "jobName": "Enfermera",
+  "monthlyIncome": 3100,
+  "role": "CLIENT_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "684617194ee51b40033165e7"
+  },
+  "name": "Jorge Luis Barrientos Mejía",
+  "username": "jbmejia",
+  "accounts": [
+    {
+      "$oid": "684618844ee51b400331662d"
+    },
+    {
+      "$oid": "6846188e4ee51b4003316633"
+    }
+  ],
+  "dpi": "1987654320102",
+  "address": "8va avenida zona 2, 7-89",
+  "cellphone": "77889900",
+  "email": "jorge.barrientos@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$sPj4qSlLvXH0WqLnzePsiw$GDW42og5lw1L/GSSsAsu8imFJwoK0DsOmo/kyQqiw1U",
+  "jobName": "Ingeniero Civil",
+  "monthlyIncome": 5800,
+  "role": "CLIENT_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "684617264ee51b40033165ed"
+  },
+  "name": "Ana Sofía Lemus Torres",
+  "username": "aslemus",
+  "accounts": [
+    {
+      "$oid": "684618a34ee51b4003316639"
+    },
+    {
+      "$oid": "684618b04ee51b400331663f"
+    }
+  ],
+  "dpi": "3091283740105",
+  "address": "3ra calle zona 8, 3-21",
+  "cellphone": "66778899",
+  "email": "ana.lemus@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$PrBHJ2C+5ZINWbutp/5IlA$ruF2ku9xvhCgF1QzgOvcJMtVQFvYMmAP8ZzebgKJXPE",
+  "jobName": "Psicóloga",
+  "monthlyIncome": 2900,
+  "role": "CLIENT_ROLE",
+  "favs": [],
+  "status": true,
+  "__v": 2
+}]
