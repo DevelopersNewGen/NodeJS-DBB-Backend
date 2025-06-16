@@ -113,15 +113,11 @@ export const updateUserAdminValidator = [
     handleErrors  
 ];
 
-export const deleteUserValidator = [
+export const deleteUserValidatorClient = [
     validateJWT,
-    hasRoles("ADMIN_ROLE"), 
-    param("uid").isMongoId().withMessage("The id is not valid"),
-    param("uid").custom(userExists),
-    param("uid").custom(isClient),
-    validateField, 
+    validateField,
     handleErrors
-];
+]
 
 export const updateUserValidator = [
     validateJWT,
@@ -163,6 +159,16 @@ export const updateUserValidator = [
     validateField,  
     handleErrors  
 ];
+
+export const updateUserValidatorAdmin = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("uid").isMongoId().withMessage("The id is not valid"),
+    param("uid").custom(isClient),
+    param("uid").custom(userExists),
+    validateField,
+    handleErrors
+];
     
 export const updatePasswordValidator = [
     validateJWT,
@@ -181,3 +187,23 @@ export const updatePasswordValidator = [
     validateField, 
     handleErrors
 ];
+
+export const deleteUserValidatorAdmin = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("uid").isMongoId().withMessage("The id is not valid"),
+    param("uid").custom(isClient),
+    param("uid").custom(userExists),
+    validateField,
+    handleErrors
+];
+
+export const validateUpdateRole = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("uid").isMongoId().withMessage("The id is not valid"),
+    body("role").notEmpty().withMessage("The role is required"),
+    body("role").isIn(["ADMIN_ROLE", "CLIENT_ROLE", "HOST_ROLE"]).withMessage("The role is not valid"),
+    validateField,
+    handleErrors    
+]
