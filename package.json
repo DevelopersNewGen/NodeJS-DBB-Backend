@@ -24,7 +24,7 @@
     "adoptionsystem": "file:",
     "argon2": "^0.41.1",
     "axios": "^1.9.0",
-    "cloudinary": "^2.6.0",
+    "cloudinary": "^2.6.1",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
@@ -40,9 +40,11 @@
     "node-cron": "^4.0.7",
     "nodejs-dbb-backend": "file:",
     "nodejs-fyph-backend": "file:",
+    "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.17.1",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.1.0"
   }
 }
