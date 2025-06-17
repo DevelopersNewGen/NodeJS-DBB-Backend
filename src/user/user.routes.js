@@ -1,7 +1,7 @@
 import {Router} from 'express';
-import { createUser, getUsers, getUserById, updateUserById, deleteUserClient, updateUser, updateUserPassword, deleteUserAdmin, updateUserAdmin, updateRole} from './user.controller.js';
+import { createUser, getUsers, getUserById, updateUserById, deleteUserClient, updateUser, updateUserPassword, deleteUserAdmin, updateUserAdmin, updateRole, getUserLogged} from './user.controller.js';
 import { createUserValidator, listUsersValidator, getUserByIdValidator, updateUserAdminValidator, 
-    deleteUserValidatorClient, updateUserValidator, updatePasswordValidator, deleteUserValidatorAdmin, updateUserValidatorAdmin, validateUpdateRole} from '../middlewares/user-validator.js';
+    deleteUserValidatorClient, updateUserValidator, updatePasswordValidator, deleteUserValidatorAdmin, updateUserValidatorAdmin, validateUpdateRole, getRoleValidator} from '../middlewares/user-validator.js';
 
 const router = Router();
 
@@ -24,5 +24,7 @@ router.put("/updateUserAdmin/:uid", updateUserValidatorAdmin, updateUserAdmin);
 router.patch('/updatePassword', updatePasswordValidator, updateUserPassword);
 
 router.patch("/updateRole/:uid", validateUpdateRole, updateRole);
+
+router.get("/getUser", getRoleValidator, getUserLogged)
 
 export default router;

@@ -202,8 +202,14 @@ export const validateUpdateRole = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
     param("uid").isMongoId().withMessage("The id is not valid"),
-    body("role").notEmpty().withMessage("The role is required"),
-    body("role").isIn(["ADMIN_ROLE", "CLIENT_ROLE", "HOST_ROLE"]).withMessage("The role is not valid"),
+    body("newRole").notEmpty().withMessage("The role is required"),
+    body("newRole").isIn(["ADMIN_ROLE", "CLIENT_ROLE"]).withMessage("The role is not valid"),
     validateField,
     handleErrors    
+]
+
+export const getRoleValidator = [
+    validateJWT,
+    validateField,
+    handleErrors
 ]

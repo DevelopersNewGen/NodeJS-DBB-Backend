@@ -1,4 +1,5 @@
 import User from "../user/user.model.js"
+import Account from "../accounts/accounts.model.js"
 import {hash, verify} from "argon2"
 
 export const createUser = async (req, res) => {
@@ -101,7 +102,7 @@ export const getUserById = async (req, res) => {
 export const updateUserById = async (req, res) => {
     try {
         const { uid } = req.params;  
-        const { name, username, email, address, cellphone, jobName, monthlyIncome, role } = req.body;
+        const { name, username, email, address, cellphone, jobName, monthlyIncome, role, status } = req.body;
 
         const updatedUser = await User.findByIdAndUpdate(
             uid, 
@@ -114,7 +115,8 @@ export const updateUserById = async (req, res) => {
                     cellphone,
                     jobName,
                     monthlyIncome,
-                    role
+                    role,
+                    status
                 }
             }, 
             { new: true, runValidators: true }
@@ -331,6 +333,46 @@ export const updateRole = async (req,res) => {
         return res.status(500).json({
             success: false,
             msg: 'Error al actualizar usuario',
+            error: err.message
+        });
+    }
+}
+
+export const getUserLogged = async (req, res) => {
+    try {
+        const { usuario } = req;
+
+        const user = await User.findById(usuario._id)
+            .populate({
+                path: "accounts",
+                select: "accountNumber" 
+            })
+            .populate({
+                path: "favs",
+                select: "accountNumber" 
+            });
+
+        return res.status(200).json({
+            success: true,
+            user: {
+                dpi: user.dpi,
+                username: user.username,
+                name: user.name,
+                email: user.email,
+                address: user.address,
+                cellphone: user.cellphone,
+                jobName: user.jobName,
+                monthlyIncome: user.monthlyIncome,
+                role: user.role,
+                accounts: user.accounts, 
+                favs: user.favs, 
+                status: user.status
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            msg: 'Error al obtener el rol del usuario',
             error: err.message
         });
     }
