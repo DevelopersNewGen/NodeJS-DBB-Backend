@@ -1,8 +1,11 @@
 import Product from "./product.model.js";
-import {uploadProductImg}
 
 export const createProduct = async (req, res) => {
     try {
+        let img = req.img ? req.img.path : null;
+
+        req.body.img = img ? img.replace(process.env.CLOUDINARY_BASE_URL, "") : null;
+        
         const product = new Product(req.body);
         await product.save();
         res.status(201).json(product);
