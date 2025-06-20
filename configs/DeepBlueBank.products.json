@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "6854d2b7629dd6be74ed61cf"
+  },
+  "productImg": "https://res.cloudinary.com/dibe6yrzf/image/upload/v1750389430/products/Product/zapatos_DBB-4ed323c8.jpg",
+  "name": "zapatos DBB",
+  "category": "Product",
+  "description": "zapatos para nuestros clientes",
+  "__v": 0
+}]
