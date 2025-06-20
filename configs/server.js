@@ -4,6 +4,7 @@ import { dbConnection } from "./mongo.js";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import cors from cors;
 import createDefaultAdmin from "./adminDefault.js";
 import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js";
@@ -15,6 +16,7 @@ import reportRoutes from "../src/report/report.routes.js"
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+  app.use(cors());
   app.use(helmet());
   app.use(morgan("dev"));
   app.use(apiLimiter);
