@@ -12,6 +12,7 @@ import userRoutes from "../src/user/user.routes.js";
 import accountsRoutes from "../src/accounts/accounts.routes.js";
 import movementsRoutes from "../src/movements/movements.routes.js"
 import reportRoutes from "../src/report/report.routes.js"
+import productRoutes from "../src/product/product.routes.js";
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -28,6 +29,7 @@ const routes = (app) => {
   app.use("/DBB/v1/accounts", accountsRoutes);
   app.use("/DBB/v1/movement", movementsRoutes);
   app.use("/DBB/v1/report", reportRoutes);
+  app.use("/DBB/v1/products", productRoutes);
 };
 
 const conectarDB = async () => {
