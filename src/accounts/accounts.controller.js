@@ -60,7 +60,8 @@ export const listAccountsByUser = async (req, res) => {
     }
     res.status(200).json({
       msg: "Accounts retrieved successfully",
-      accounts: user,
+      accounts: user.accounts, 
+      name: user.name,         
     });
   } catch (error) {
     res.status(500).json({ msg: "Internal server error" });

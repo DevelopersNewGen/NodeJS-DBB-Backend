@@ -355,6 +355,7 @@ export const getUserLogged = async (req, res) => {
         return res.status(200).json({
             success: true,
             user: {
+                _id: user._id,
                 dpi: user.dpi,
                 username: user.username,
                 name: user.name,
