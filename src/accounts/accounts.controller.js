@@ -4,7 +4,8 @@ import generateAccountNumber from "../helpers/generate-account.js";
 
 export const createAccount = async (req, res) => {
   try {
-    const user = req.usuario;
+    const { uid } = req.params;
+    const user = await User.findById(uid);
 
     if (!user || !user.status) {
       return res.status(404).json({ msg: "User not found or inactive" });
@@ -18,6 +19,7 @@ export const createAccount = async (req, res) => {
       accountNumber,
       accountType,
       balance,
+      user: user._id, 
     });
 
     await newAccount.save();

@@ -14,7 +14,7 @@ import {
 
 const router = Router();
 
-router.post("/createAccount", createAccountValidator,checkAccountTypeExists, createAccount);
+router.post("/createAccount/:uid", createAccountValidator,checkAccountTypeExists, createAccount);
 
 router.get("/listAccounts", listAccounts);
 
