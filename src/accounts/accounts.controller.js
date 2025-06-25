@@ -1,5 +1,6 @@
 import Accounts from "../accounts/accounts.model.js";
 import User from "../user/user.model.js";
+import Movements from "../movements/movements.model.js";
 import generateAccountNumber from "../helpers/generate-account.js";
 
 export const createAccount = async (req, res) => {
@@ -77,6 +78,32 @@ export const getAccountById = async (req, res) => {
     res.status(200).json({
       msg: "Account retrieved successfully",
       account,
+    });
+  } catch (error) {
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
+export const getAccountRecentMovements = async (req, res) => {
+  try {
+    const { accountNumber } = req.body; 
+
+    if (!accountNumber) {
+      return res.status(400).json({ msg: "Account number is required" });
+    }
+
+    const account = await Accounts.findOne({ accountNumber });
+    if (!account) {
+      return res.status(404).json({ msg: "Account not found" });
+    }
+
+    const movements = await Movements.find({ account: account._id })
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    res.status(200).json({
+      msg: "Recent movements retrieved successfully",
+      movements,
     });
   } catch (error) {
     res.status(500).json({ msg: "Internal server error" });
