@@ -8,9 +8,9 @@ import {
 import {
   createAccountValidator,
   listAccountsByUserValidator,
-  getAccountByIdValidator,
-  checkAccountTypeExists
+  getAccountByIdValidator
 } from "../middlewares/accounts-validator.js";
+import { checkAccountTypeExists } from "../middlewares/checkAccountTypeExists.js";
 
 const router = Router();
 
