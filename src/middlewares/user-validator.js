@@ -117,8 +117,7 @@ export const updateUserValidatorAdmin = [
     body("username")
         .optional()  
         .notEmpty().withMessage("Username is required")
-        .isLength({ max: 20 }).withMessage("Username cannot exceed 20 characters")
-        .custom(usernameExists),
+        .isLength({ max: 20 }).withMessage("Username cannot exceed 20 characters"),
     body("address")
         .optional()  
         .notEmpty().withMessage("Address is required"),
@@ -129,8 +128,7 @@ export const updateUserValidatorAdmin = [
     body("email")
         .optional()  
         .notEmpty().withMessage("Email is required")
-        .isEmail().withMessage("Email must be valid")
-        .custom(emailExists),
+        .isEmail().withMessage("Email must be valid"),
     body("jobName")
         .optional()  
         .notEmpty().withMessage("Job name is required"),
