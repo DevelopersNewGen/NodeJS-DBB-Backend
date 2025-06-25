@@ -20,6 +20,11 @@ const accountsSchema = Schema({
     type: Boolean,
     default: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "User is required"],
+  },
 });
 
 accountsSchema.methods.toJSON = function () {
