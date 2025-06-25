@@ -1,34 +1,14 @@
 import User from "../user/user.model.js"
-import Account from "../accounts/accounts.model.js"
 import {hash, verify} from "argon2"
 
 export const createUser = async (req, res) => {
     try {
-        const {
-            name,
-            username,
-            dpi,
-            address,
-            cellphone,
-            email,
-            password,
-            jobName,
-            monthlyIncome
-        } = req.body;
+        const {name, username, dpi, address, cellphone, email, password, jobName, monthlyIncome} = req.body;
 
         const hashedPassword = await hash(password);
 
-        const newUser = new User({
-            name,
-            username,
-            dpi,
-            address,
-            cellphone,
-            email,
-            password: hashedPassword,
-            jobName,
-            monthlyIncome
-        });
+        const newUser = new User({name, username, dpi, address, cellphone, email, password: hashedPassword,
+        jobName, monthlyIncome});
 
         await newUser.save();
 
@@ -99,98 +79,14 @@ export const getUserById = async (req, res) => {
     }
 };
 
-export const updateUserById = async (req, res) => {
-    try {
-        const { uid } = req.params;  
-        const { name, username, email, address, cellphone, jobName, monthlyIncome, role, status } = req.body;
-
-        const updatedUser = await User.findByIdAndUpdate(
-            uid, 
-            {
-                $set: {
-                    name,
-                    username,
-                    email,
-                    address,
-                    cellphone,
-                    jobName,
-                    monthlyIncome,
-                    role,
-                    status
-                }
-            }, 
-            { new: true, runValidators: true }
-        );
-
-        if (!updatedUser) {
-            return res.status(404).json({
-                success: false,
-                message: "User not found"
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            message: "User updated successfully",
-            user: updatedUser.toJSON()  
-        });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to update user",
-            error: err.message
-        });
-    }
-};
-
-export const deleteUserClient = async (req, res) => {
-    try {
-        const { usuario } = req;
-
-        if (!usuario) {
-            return res.status(400).json({
-                success: false,
-                message: "Usuario no proporcionado"
-            });
-        }
-
-        const user = await User.findByIdAndUpdate(usuario._id, { status: false }, { new: true });
-
-        return res.status(200).json({
-            success: true,
-            message: "Usuario eliminado",
-            user
-        });
-    } catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "Error al eliminar el usuario",
-            error: err.message
-        });
-    }
-};
-
+//USUARIO
 export const updateUser = async (req, res) => {
     try {
         const { usuario } = req;  
-        const { name, username, email, address, cellphone, jobName, monthlyIncome } = req.body;
+        const { username, email, address, cellphone, jobName, monthlyIncome } = req.body;
 
-        const updatedUser = await User.findByIdAndUpdate(
-            usuario._id, 
-            {
-                $set: {
-                    name,
-                    username,
-                    email,
-                    address,
-                    cellphone,
-                    jobName,
-                    monthlyIncome
-                }
-            }, 
-            { new: true, runValidators: true }
-        );
+        const updatedUser = await User.findByIdAndUpdate(usuario._id, {$set:{username, email, address,
+        cellphone, jobName, monthlyIncome}}, { new: true, runValidators: true });
 
         if (!updatedUser) {
             return res.status(404).json({
@@ -236,65 +132,56 @@ export const updateUserAdmin = async (req, res) => {
 };
 
 export const updateUserPassword = async (req, res) => {
-    try {
-        const { usuario } = req;  
-        const { password1, password2, newPassword } = req.body;
+  try {
+    const { usuario } = req;
+    const { contraActual, nuevaContra, confirmacionContra } = req.body;
 
-        if (password1 !== password2) {
-            return res.status(400).json({
-                success: false,
-                message: "Las contraseñas proporcionadas no coinciden"
-            });
-        }
-
-        if (password1 === newPassword) {
-            return res.status(400).json({
-                success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
-            });
-        }
-
-        const user = await User.findById(usuario._id);
-        if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "Usuario no encontrado"
-            });
-        }
-
-        if (!user.password || !user.password.startsWith('$')) {
-            console.error('Hash de contraseña inválido para usuario:', user._id);
-            return res.status(500).json({
-                success: false,
-                message: "Error interno: formato de contraseña inválido"
-            });
-        }
-
-        const isPasswordValid = await verify(user.password, password1);
-        if (!isPasswordValid) {
-            return res.status(400).json({
-                success: false,
-                message: "La contraseña actual es incorrecta"
-            });
-        }
-
-        const hashedNewPassword = await hash(newPassword, 10); 
-
-        user.password = hashedNewPassword;
-        await user.save();
-
-        return res.status(200).json({
-            success: true,
-            message: "Contraseña actualizada exitosamente" 
-        });
-    } catch (err) {
-        console.error('Error en updateUserPassword:', err);
-        return res.status(500).json({
-            success: false,
-            message: "Error al actualizar la contraseña",
-            error: err.message
-        });
+    const user = await User.findById(usuario._id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Usuario no encontrado"
+      });
     }
+
+    if (nuevaContra !== confirmacionContra) {
+      return res.status(400).json({
+        success: false,
+        message: "La nueva contraseña y su confirmación no coinciden"
+      });
+    }
+
+    const contraActualValida = await verify(user.password, contraActual);
+    if (!contraActualValida) {
+      return res.status(400).json({
+        success: false,
+        message: "La contraseña actual es incorrecta"
+      });
+    }
+
+    if (contraActual === nuevaContra) {
+      return res.status(400).json({
+        success: false,
+        message: "La nueva contraseña no puede ser igual a la anterior"
+      });
+    }
+
+    const hashedNew = await hash(nuevaContra, 10);
+    user.password = hashedNew;
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Contraseña actualizada exitosamente"
+    });
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Error al actualizar la contraseña",
+      error: err.message
+    });
+  }
 };
 
 export const deleteUserAdmin = async (req, res) => {
@@ -344,10 +231,6 @@ export const getUserLogged = async (req, res) => {
 
         const user = await User.findById(usuario._id)
             .populate({
-                path: "accounts",
-                select: "accountNumber" 
-            })
-            .populate({
                 path: "favs",
                 select: "accountNumber" 
             });
@@ -360,12 +243,7 @@ export const getUserLogged = async (req, res) => {
                 username: user.username,
                 name: user.name,
                 email: user.email,
-                address: user.address,
-                cellphone: user.cellphone,
-                jobName: user.jobName,
-                monthlyIncome: user.monthlyIncome,
                 role: user.role,
-                accounts: user.accounts, 
                 favs: user.favs, 
                 status: user.status
             }

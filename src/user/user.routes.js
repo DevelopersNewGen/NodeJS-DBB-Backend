@@ -1,7 +1,7 @@
 import {Router} from 'express';
-import { createUser, getUsers, getUserById, updateUserById, deleteUserClient, updateUser, updateUserPassword, deleteUserAdmin, updateUserAdmin, updateRole, getUserLogged} from './user.controller.js';
-import { createUserValidator, listUsersValidator, getUserByIdValidator, updateUserAdminValidator, 
-    deleteUserValidatorClient, updateUserValidator, updatePasswordValidator, deleteUserValidatorAdmin, updateUserValidatorAdmin, validateUpdateRole, getRoleValidator} from '../middlewares/user-validator.js';
+import { createUser, getUsers, getUserById, updateUser, updateUserPassword, deleteUserAdmin, updateUserAdmin, updateRole, getUserLogged} from './user.controller.js';
+import { createUserValidator, listUsersValidator, getUserByIdValidator, 
+    updateUserValidator, updatePasswordValidator, deleteUserValidatorAdmin, updateUserValidatorAdmin, validateUpdateRole, getRoleValidator} from '../middlewares/user-validator.js';
 
 const router = Router();
 
@@ -10,10 +10,6 @@ router.post('/createUser', createUserValidator, createUser);
 router.get('/', listUsersValidator, getUsers);
 
 router.get('/findUser/:uid', getUserByIdValidator, getUserById);
-
-router.put('/updateUserById/:uid', updateUserAdminValidator, updateUserById);
-
-router.delete("/deleteUserClient", deleteUserValidatorClient, deleteUserClient);
 
 router.delete("/deleteUserAdmin/:uid", deleteUserValidatorAdmin, deleteUserAdmin);
 
