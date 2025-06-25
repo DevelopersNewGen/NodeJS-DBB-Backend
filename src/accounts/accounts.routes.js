@@ -4,11 +4,13 @@ import {
   listAccounts,
   listAccountsByUser,
   getAccountById,
+  getAccountRecentMovements,
 } from "./accounts.controller.js";
 import {
   createAccountValidator,
   listAccountsByUserValidator,
-  getAccountByIdValidator
+  getAccountByIdValidator,
+  getAccountRecentMovementsValidator
 } from "../middlewares/accounts-validator.js";
 import { checkAccountTypeExists } from "../middlewares/checkAccountTypeExists.js";
 
@@ -21,5 +23,7 @@ router.get("/listAccounts", listAccounts);
 router.get("/user/:uid", listAccountsByUserValidator, listAccountsByUser);
 
 router.get("/:aid", getAccountByIdValidator, getAccountById);
+
+router.post("/recent-movements",getAccountRecentMovementsValidator, getAccountRecentMovements);
 
 export default router;

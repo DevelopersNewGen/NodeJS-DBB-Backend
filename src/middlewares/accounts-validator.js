@@ -43,3 +43,10 @@ export const getAccountByIdValidator = [
   validateField,
   handleErrors,
 ];
+
+export const getAccountRecentMovementsValidator = [
+  validateJWT,
+  hasRoles("ADMIN_ROLE"),
+  validateField,
+  handleErrors,
+];
