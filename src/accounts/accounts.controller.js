@@ -41,12 +41,14 @@ export const createAccount = async (req, res) => {
 
 export const listAccounts = async (req, res) => {
   try {
-    const accounts = await Accounts.find();
+
+    const accounts = await Accounts.find().populate("user", "name"); 
     res.status(200).json({
       msg: "Accounts retrieved successfully",
       accounts,
     });
   } catch (error) {
+    console.error("Error al listar cuentas:", error);
     res.status(500).json({ msg: "Internal server error" });
   }
 };
