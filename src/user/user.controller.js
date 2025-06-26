@@ -188,7 +188,7 @@ export const deleteUserAdmin = async (req, res) => {
     try {
         const { uid } = req.params;
 
-        const user = await User.findByIdAndUpdate(uid, { status: false }, { new: true });
+        const user = await User.findByIdAndDelete(uid);
 
         return res.status(200).json({
             success: true,
@@ -245,7 +245,11 @@ export const getUserLogged = async (req, res) => {
                 email: user.email,
                 role: user.role,
                 favs: user.favs, 
-                status: user.status
+                status: user.status,
+                cellphone: user.cellphone,
+                address: user.address,
+                jobName: user.jobName,
+                monthlyIncome: user.monthlyIncome
             }
         });
     } catch (err) {
