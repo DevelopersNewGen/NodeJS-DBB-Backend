@@ -22,10 +22,10 @@ export const makeTransferValidator = [
     hasRoles("CLIENT_ROLE"),
     param("originAccount")
         .notEmpty().withMessage("Origin account is required")
-        .isMongoId().withMessage("Origin account must be a valid Mongo ID"),
+        .isString().withMessage("Origin account must be a string"),
     body("destinationAccount")
         .notEmpty().withMessage("Destination account is required")
-        .isMongoId().withMessage("Destination account must be a valid Mongo ID"),
+        .isString().withMessage("Destination account must be a string"),
     body("amount")
         .notEmpty().withMessage("Amount is required")
         .isFloat({ gt: 0 }).withMessage("Amount must be greater than 0"),

@@ -4,35 +4,35 @@ import User from "../user/user.model.js"
 
 export const makeTransfer = async (req, res) => {
     try {
-        const originAccountId = req.params.originAccount;
+        const originAccountNumber = req.params.originAccount; 
         const { destinationAccount, amount, description = "" } = req.body;
         const { usuario } = req;
 
         if (!destinationAccount)
-        return res.status(400).json({ msg: "Destination account is required" });
+            return res.status(400).json({ msg: "Destination account is required" });
 
         if (amount <= 0)
-        return res.status(400).json({ msg: "Amount must be greater than zero" });
+            return res.status(400).json({ msg: "Amount must be greater than zero" });
 
-        const origin = await Accounts.findById(originAccountId);
+        const origin = await Accounts.findOne({ accountNumber: originAccountNumber });
         if (!origin)
-        return res.status(404).json({ msg: "Origin account not found" });
+            return res.status(404).json({ msg: "Origin account not found" });
 
         if (!origin.status)
-        return res.status(400).json({ msg: "Origin account is inactive" });
+            return res.status(400).json({ msg: "Origin account is inactive" });
 
         const ownsAccount = usuario.accounts.some(
-        (accId) => accId?.toString() === originAccountId
+            (accId) => accId?.toString() === origin._id.toString()
         );
         if (!ownsAccount)
-        return res.status(403).json({ msg: "You do not own the origin account" });
+            return res.status(403).json({ msg: "You do not own the origin account" });
 
-        const destination = await Accounts.findById(destinationAccount);
+        const destination = await Accounts.findOne({ accountNumber: destinationAccount });
         if (!destination || !destination.status)
-        return res.status(404).json({ msg: "Destination account not found or inactive" });
+            return res.status(404).json({ msg: "Destination account not found or inactive" });
 
         if (origin.balance < amount)
-        return res.status(400).json({ msg: "Insufficient funds" });
+            return res.status(400).json({ msg: "Insufficient funds" });
 
         origin.balance = Number((origin.balance - amount).toFixed(2));
         await origin.save();
@@ -41,31 +41,31 @@ export const makeTransfer = async (req, res) => {
         await destination.save();
 
         const withdrawalMovement = new Movements({
-        originAccount: originAccountId,
-        destinationAccount,
-        amount,
-        type: "TRANSFER_OUT",
-        description,
-        balanceAfter: origin.balance,
+            originAccount: origin._id,
+            destinationAccount: destination._id,
+            amount,
+            type: "TRANSFER_OUT",
+            description,
+            balanceAfter: origin.balance,
         });
         await withdrawalMovement.save();
 
         const depositMovement = new Movements({
-        originAccount: originAccountId,
-        destinationAccount,
-        amount,
-        type: "TRANSFER_IN",
-        description,
-        balanceAfter: destination.balance,
+            originAccount: origin._id,
+            destinationAccount: destination._id,
+            amount,
+            type: "TRANSFER_IN",
+            description,
+            balanceAfter: destination.balance,
         });
         await depositMovement.save();
 
         return res.status(201).json({
-        msg: "Transfer completed successfully",
-        withdrawal: withdrawalMovement,
-        deposit: depositMovement,
-        newBalanceOrigin: origin.balance,
-        newBalanceDestination: destination.balance,
+            msg: "Transfer completed successfully",
+            withdrawal: withdrawalMovement,
+            deposit: depositMovement,
+            newBalanceOrigin: origin.balance,
+            newBalanceDestination: destination.balance,
         });
     } catch (err) {
         console.error(err);
