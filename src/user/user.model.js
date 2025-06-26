@@ -56,8 +56,14 @@ const userSchema = Schema({
     },
     favs: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Accounts'
+            accountNumber: {
+                type: String,
+                required: true
+            },
+            alias: {
+                type: String,
+                required: false
+            }
         }
     ],
     status: {
