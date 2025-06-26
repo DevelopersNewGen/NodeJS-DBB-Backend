@@ -12,11 +12,10 @@ import {
   getAccountByIdValidator,
   getAccountRecentMovementsValidator
 } from "../middlewares/accounts-validator.js";
-import { checkAccountTypeExists } from "../middlewares/checkAccountTypeExists.js";
 
 const router = Router();
 
-router.post("/createAccount/:uid", createAccountValidator,checkAccountTypeExists, createAccount);
+router.post("/createAccount/:uid", createAccountValidator, createAccount);
 
 router.get("/listAccounts", listAccounts);
 
