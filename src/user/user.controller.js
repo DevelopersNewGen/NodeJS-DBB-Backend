@@ -1,4 +1,5 @@
 import User from "../user/user.model.js"
+import Accounts from "../accounts/accounts.model.js"    
 import {hash, verify} from "argon2"
 
 export const createUser = async (req, res) => {
