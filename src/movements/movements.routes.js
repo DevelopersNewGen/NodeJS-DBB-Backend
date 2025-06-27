@@ -12,7 +12,7 @@ router.patch("/deposit/:mid", updateDepositValidator, validateDepositTimeLimit, 
 
 router.delete("/deposit/:mid", revertDepositValidator, validateDepositTimeLimit, revertDepositAmount)
 
-router.patch("/withdrawal", withdrawalValidator,makeWithdrawal)
+router.post("/withdrawal", withdrawalValidator,makeWithdrawal)
 
 router.get("/account/:aid", getAccountMovementsValidator, getAccountMovements)
 

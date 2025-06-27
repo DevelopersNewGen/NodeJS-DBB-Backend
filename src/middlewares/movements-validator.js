@@ -82,9 +82,9 @@ export const getMyRecentMovementsValidator = [
 export const withdrawalValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    body("accountId")
-        .notEmpty().withMessage("Account ID is required")
-        .isMongoId().withMessage("Invalid account ID"),
+    body("accountNumber")
+        .notEmpty().withMessage("Account number is required")
+        .isString().withMessage("Account number must be a string"),
     body("amount")
         .notEmpty().withMessage("Amount is required")
         .isFloat({ gt: 0 }).withMessage("Amount must be greater than 0"),

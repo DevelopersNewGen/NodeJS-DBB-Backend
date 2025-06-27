@@ -118,40 +118,40 @@ export const makeDeposit = async (req, res) => {
 
 export const makeWithdrawal = async (req, res) => {
     try {
-        const { accountId, amount, description = "" } = req.body;
+        const { accountNumber, amount, description = "" } = req.body;
 
-        if (!accountId)
-        return res.status(400).json({ msg: "Account ID is required" });
+        if (!accountNumber)
+            return res.status(400).json({ msg: "Account number is required" });
 
         const numericAmount = parseFloat(amount);
         if (isNaN(numericAmount) || numericAmount <= 0)
-        return res.status(400).json({ msg: "Amount must be a valid number greater than zero" });
+            return res.status(400).json({ msg: "Amount must be a valid number greater than zero" });
 
-        const account = await Accounts.findById(accountId);
+        const account = await Accounts.findOne({ accountNumber });
         if (!account?.status)
-        return res.status(404).json({ msg: "Account not found or inactive" });
+            return res.status(404).json({ msg: "Account not found or inactive" });
 
         if (account.balance < numericAmount)
-        return res.status(400).json({ msg: "Insufficient funds" });
+            return res.status(400).json({ msg: "Insufficient funds" });
 
         account.balance = Math.round((account.balance - numericAmount) * 100) / 100;
         await account.save();
 
         const withdrawalMovement = new Movements({
-        originAccount: accountId,
-        destinationAccount: null,
-        amount: numericAmount,
-        type: "WITHDRAWAL",
-        description,
-        balanceAfter: account.balance,
+            originAccount: account._id,
+            destinationAccount: null,
+            amount: numericAmount,
+            type: "WITHDRAWAL",
+            description,
+            balanceAfter: account.balance,
         });
 
         await withdrawalMovement.save();
 
         res.status(201).json({
-        msg: "Withdrawal completed successfully",
-        withdrawal: withdrawalMovement,
-        newBalance: account.balance,
+            msg: "Withdrawal completed successfully",
+            withdrawal: withdrawalMovement,
+            newBalance: account.balance,
         });
     } catch (err) {
         res.status(500).json({ msg: "Server error", error: err.message });
