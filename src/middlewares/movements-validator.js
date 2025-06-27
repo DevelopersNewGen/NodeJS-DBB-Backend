@@ -9,7 +9,7 @@ export const makeDepositValidator = [
     hasRoles("ADMIN_ROLE"),
     body("destinationAccount")
         .notEmpty().withMessage("Destination account is required")
-        .isMongoId().withMessage("Must be a valid Mongo ID"),
+        .isString().withMessage("Destination account must be a string"),
     body("amount")
         .notEmpty().withMessage("Amount is required")
         .isFloat({ gt: 0 }).withMessage("Amount must be a number greater than 0"),

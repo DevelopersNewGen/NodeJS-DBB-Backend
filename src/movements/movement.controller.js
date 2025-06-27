@@ -78,40 +78,40 @@ export const makeDeposit = async (req, res) => {
         const { destinationAccount, amount, description = "" } = req.body;
 
         if (!destinationAccount)
-        return res.status(400).json({ msg: "Destination account is required" });
+            return res.status(400).json({ msg: "Destination account is required" });
 
         const numericAmount = parseFloat(amount);
 
         if (isNaN(numericAmount) || numericAmount <= 0)
-        return res.status(400).json({ msg: "Amount must be a valid number greater than zero" });
+            return res.status(400).json({ msg: "Amount must be a valid number greater than zero" });
 
-        const account = await Accounts.findById(destinationAccount);
+        const account = await Accounts.findOne({ accountNumber: destinationAccount });
         if (!account?.status)
-        return res.status(404).json({ msg: "Destination account not found or inactive" });
+            return res.status(404).json({ msg: "Destination account not found or inactive" });
 
         account.balance = Math.round((account.balance + numericAmount) * 100) / 100;
         await account.save();
 
         const depositMovement = new Movements({
-        originAccount: null,
-        destinationAccount,
-        amount: numericAmount,
-        type: "DEPOSIT",
-        description,
-        balanceAfter: account.balance,
+            originAccount: null,
+            destinationAccount: account._id, 
+            amount: numericAmount,
+            type: "DEPOSIT",
+            description,
+            balanceAfter: account.balance,
         });
 
         await depositMovement.save();
 
         res.status(201).json({
-        msg: "Deposit completed successfully",
-        deposit: depositMovement,
-        newBalance: account.balance,
+            msg: "Deposit completed successfully",
+            deposit: depositMovement,
+            newBalance: account.balance,
         });
     } catch (err) {
         res.status(500).json({
-        msg: "Server error",
-        error: err.message,
+            msg: "Server error",
+            error: err.message,
         });
     }
 };
