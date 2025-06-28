@@ -345,3 +345,30 @@ export const getMyRecentMovements = async (req, res) => {
 };
 
 
+export const getAllMovements = async (req, res) => {
+    try {
+        const { limit = 10, from = 0 } = req.query;
+
+        const [total, movements] = await Promise.all([
+            Movements.countDocuments(),
+            Movements.find()
+                .skip(Number(from))
+                .limit(Number(limit))
+                .sort({ createdAt: -1 })
+                .populate("originAccount", "accountNumber accountType")
+                .populate("destinationAccount", "accountNumber accountType")
+        ]);
+
+        return res.status(200).json({
+            success: true,
+            total,
+            movements
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: "Error fetching all movements",
+            error: err.message
+        });
+    }
+}

@@ -91,3 +91,17 @@ export const withdrawalValidator = [
     validateField,
     handleErrors
 ]
+
+export const validateGetAllMovements = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("limit")
+        .optional()
+        .isInt({ min: 1 }).withMessage("Limit must be a positive integer"),
+    param("from")
+        .optional()
+        .isInt({ min: 0 }).withMessage("From must be a non-negative integer"),
+    validateField,
+    handleErrors    
+];
+
