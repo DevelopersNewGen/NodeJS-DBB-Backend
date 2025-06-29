@@ -74,9 +74,8 @@ export const getTopMovementsValidator = [
 export const getMyRecentMovementsValidator = [
     validateJWT,
     hasRoles("CLIENT_ROLE"),
-    param("aid")
-        .notEmpty().withMessage("Account ID is required")
-        .isMongoId().withMessage("Invalid account ID")
+    param("accountNumber")
+        .notEmpty().withMessage("Account is required")
 ];
 
 export const withdrawalValidator = [

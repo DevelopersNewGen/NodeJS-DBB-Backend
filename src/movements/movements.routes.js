@@ -22,7 +22,7 @@ router.get("/top", getTopMovementsValidator, getTopMovements)
 
 router.post("/transfer/:originAccount", makeTransferValidator, validateTransferLimits,  makeTransfer)
 
-router.get("/recent/:aid",getMyRecentMovementsValidator, getMyRecentMovements )
+router.get("/recent/:accountNumber",getMyRecentMovementsValidator, getMyRecentMovements )
 
 router.get("/", validateGetAllMovements, getAllMovements)
 
