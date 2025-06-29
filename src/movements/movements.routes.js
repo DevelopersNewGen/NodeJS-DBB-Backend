@@ -1,8 +1,8 @@
 import { Router } from "express";
 import {makeTransfer, getAccountMovements, getMyRecentMovements, getTopMovements, makeDeposit, revertDepositAmount, updateDepositAmount, 
-    makeWithdrawal, getAllMovements} from "./movement.controller.js"
+    makeWithdrawal, getAllMovements, getUserMovements} from "./movement.controller.js"
 import { makeTransferValidator, getAccountMovementsValidator, getMyRecentMovementsValidator,getTopMovementsValidator,makeDepositValidator, 
-    revertDepositValidator, updateDepositValidator, withdrawalValidator, validateGetAllMovements } from "../middlewares/movements-validator.js";
+    revertDepositValidator, updateDepositValidator, validateGetUserMovements, withdrawalValidator, validateGetAllMovements } from "../middlewares/movements-validator.js";
 import { validateDepositTimeLimit } from "../middlewares/deposit-time-limit-validator.js"; 
 import { validateTransferLimits } from "../middlewares/transfer-limit-validator.js";
 
@@ -25,5 +25,7 @@ router.post("/transfer/:originAccount", makeTransferValidator, validateTransferL
 router.get("/recent/:aid",getMyRecentMovementsValidator, getMyRecentMovements )
 
 router.get("/", validateGetAllMovements, getAllMovements)
+
+router.get("/user", validateGetUserMovements, getUserMovements)
 
 export default router

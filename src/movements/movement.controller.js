@@ -372,3 +372,41 @@ export const getAllMovements = async (req, res) => {
         });
     }
 }
+
+export const getUserMovements = async (req, res) => {
+    try {
+        const usuario = req.usuario; 
+        const { limit = 10, from = 0 } = req.query;
+
+        const accountIds = usuario.accounts;
+
+        const query = {
+            $or: [
+                { originAccount: { $in: accountIds } },
+                { destinationAccount: { $in: accountIds } }
+            ]
+        };
+
+        const [total, movements] = await Promise.all([
+            Movements.countDocuments(query),
+            Movements.find(query)
+                .skip(Number(from))
+                .limit(Number(limit))
+                .sort({ createdAt: -1 })
+                .populate("originAccount", "accountNumber accountType")
+                .populate("destinationAccount", "accountNumber accountType")
+        ]);
+
+        return res.status(200).json({
+            success: true,
+            total,
+            movements
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: "Error fetching user movements",
+            error: err.message
+        });
+    }
+};
