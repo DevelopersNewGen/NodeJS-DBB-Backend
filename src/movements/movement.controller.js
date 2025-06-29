@@ -222,13 +222,21 @@ export const revertDepositAmount = async (req, res) => {
 
 export const getAccountMovements = async (req, res) => {
     try {
-        const { accountId } = req.params;
+        const { aid } = req.params;
         const { limit = 10, from = 0 } = req.query;
+
+        let account = await Accounts.findById(aid);
+        if (!account) {
+            account = await Accounts.findOne({ accountNumber: aid });
+        }
+        if (!account) {
+            return res.status(404).json({ msg: "Account not found" });
+        }
 
         const query = {
             $or: [
-                { originAccount: accountId },
-                { destinationAccount: accountId }
+                { originAccount: account._id },
+                { destinationAccount: account._id }
             ]
         };
 
