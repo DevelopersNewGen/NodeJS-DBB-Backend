@@ -424,3 +424,33 @@ export const getUserMovements = async (req, res) => {
         });
     }
 };
+
+export const getMovemntsById = async (req, res) => {
+    try {
+        const { mid } = req.params;
+
+        if (!mid) {
+            return res.status(400).json({ msg: "Movement ID is required" });
+        }
+
+        const movement = await Movements.findById(mid)
+            .populate("originAccount", "accountNumber accountType")
+            .populate("destinationAccount", "accountNumber accountType");
+
+        if (!movement) {
+            return res.status(404).json({ msg: "Movement not found" });
+        }
+
+        return res.status(200).json({
+            success: true,
+            movement
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: "Error fetching movement by ID",
+            error: err.message
+        });
+    }
+}
+

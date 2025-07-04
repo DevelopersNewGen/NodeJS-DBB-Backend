@@ -116,3 +116,13 @@ export const validateGetUserMovements = [
     validateField,
     handleErrors
 ];
+
+export const getMovementsByIdValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("mid")
+        .notEmpty().withMessage("Movement ID is required")
+        .isMongoId().withMessage("Invalid movement ID"),
+    validateField,
+    handleErrors
+];
