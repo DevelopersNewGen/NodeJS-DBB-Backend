@@ -36,9 +36,9 @@ export const makeTransferValidator = [
 export const updateDepositValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    param("mid")
-        .notEmpty().withMessage("Movement ID is required")
-        .isMongoId().withMessage("Invalid movement ID"),
+    param("accountNumber")
+        .notEmpty().withMessage("Account number is required")
+        .isString().withMessage("Account number must be a string"),
     body("newAmount")
         .notEmpty().withMessage("New amount is required")
         .isFloat({ gt: 0 }).withMessage("New amount must be greater than 0"),
@@ -49,9 +49,9 @@ export const updateDepositValidator = [
 export const revertDepositValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    param("mid")
-        .notEmpty().withMessage("Movement ID is required")
-        .isMongoId().withMessage("Invalid movement ID"),
+    param("accountNumber")
+        .notEmpty().withMessage("Account number is required")
+        .isString().withMessage("Account number must be a string"),
     validateField,
     handleErrors,
 ];

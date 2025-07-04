@@ -166,12 +166,11 @@ export const updateDepositAmount = async (req, res) => {
         if (newAmount <= 0)
             return res.status(400).json({ msg: "Amount must be greater than zero" });
 
-        const account = await Accounts.findById(movement.destinationAccount);
+        const account = await Accounts.findOne({ accountNumber: movement.destinationAccountNumber });
         if (!account?.status)
             return res.status(404).json({ msg: "Destination account not found or inactive" });
 
         account.balance -= movement.amount;
-
         account.balance += newAmount;
 
         movement.amount = newAmount;
@@ -198,7 +197,7 @@ export const revertDepositAmount = async (req, res) => {
             return res.status(400).json({ msg: "Invalid or already reverted deposit" });
         }
 
-        const account = await Accounts.findById(movement.destinationAccount);
+        const account = await Accounts.findOne({ accountNumber: movement.destinationAccountNumber });
         if (!account) {
             return res.status(404).json({ msg: "Destination account not found" });
         }
