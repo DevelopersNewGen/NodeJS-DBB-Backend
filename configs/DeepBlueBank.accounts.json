@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "684617c84ee51b40033165f7"
+  },
+  "accountNumber": "GT00BAMXQCC6291288496367318",
+  "balance": 1432.25,
+  "accountType": "MONETARY",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684617d84ee51b40033165fd"
+  },
+  "accountNumber": "GT00BAMXQCC2746844614222838",
+  "balance": 7220,
+  "accountType": "SAVER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684617e24ee51b4003316603"
+  },
+  "accountNumber": "GT00BAMXQAH3750475182283540",
+  "balance": 2350.75,
+  "accountType": "OTHER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684617fb4ee51b4003316609"
+  },
+  "accountNumber": "GT00BAGRQPL7564580179122462",
+  "balance": 21400.5,
+  "accountType": "SAVER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618064ee51b400331660f"
+  },
+  "accountNumber": "GT00BACRQCA5670158028126277",
+  "balance": 1980,
+  "accountType": "MONETARY",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618174ee51b4003316615"
+  },
+  "accountNumber": "GT00BAGRQPL8497238849951443",
+  "balance": 825.99,
+  "accountType": "MONETARY",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6846181e4ee51b400331661b"
+  },
+  "accountNumber": "GT00BAGRQPL8981006655223084",
+  "balance": 2900,
+  "accountType": "SAVER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618294ee51b4003316621"
+  },
+  "accountNumber": "GT00BAMXQPL6294729032387002",
+  "balance": 15200.5,
+  "accountType": "OTHER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618574ee51b4003316627"
+  },
+  "accountNumber": "GT00BACRQCC2688405445574906",
+  "balance": 1060,
+  "accountType": "MONETARY",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618844ee51b400331662d"
+  },
+  "accountNumber": "GT00BVGTQCA1338732537436890",
+  "balance": 8950,
+  "accountType": "SAVER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6846188e4ee51b4003316633"
+  },
+  "accountNumber": "GT00BAGRQCC2168144255394411",
+  "balance": 10200,
+  "accountType": "OTHER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618a34ee51b4003316639"
+  },
+  "accountNumber": "GT00BACRQPL1263067620512737",
+  "balance": 1100,
+  "accountType": "SAVER",
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "684618b04ee51b400331663f"
+  },
+  "accountNumber": "GT00BAGRQCA3652337401717645",
+  "balance": 699.5,
+  "accountType": "OTHER",
+  "status": true,
+  "__v": 0
+}]
