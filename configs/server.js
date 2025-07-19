@@ -14,8 +14,6 @@ import reportRoutes from "../src/report/report.routes.js"
 import productRoutes from "../src/product/product.routes.js";
 
 const middlewares = (app) => {
-
-  app.set('trust proxy', true);
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(cors());
@@ -49,7 +47,7 @@ export const initServer = () => {
     middlewares(app);
     conectarDB();
     routes(app);
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT;
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
