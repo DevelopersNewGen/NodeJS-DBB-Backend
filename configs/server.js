@@ -14,6 +14,8 @@ import reportRoutes from "../src/report/report.routes.js"
 import productRoutes from "../src/product/product.routes.js";
 
 const middlewares = (app) => {
+
+  app.set('trust proxy', true);
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(cors());
