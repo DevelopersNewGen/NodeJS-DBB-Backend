@@ -41,13 +41,18 @@ const conectarDB = async () => {
   }
 };
 
-export const initServer = () => {
+export const createApp = () => {
   const app = express();
+  middlewares(app);
+  conectarDB();
+  routes(app);
+  return app;
+};
+
+export const initServer = () => {
+  const app = createApp();
   try {
-    middlewares(app);
-    conectarDB();
-    routes(app);
-    const port = process.env.PORT;
+    const port = process.env.PORT || 3000;
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
