@@ -13,6 +13,7 @@ import movementsRoutes from "../src/movements/movements.routes.js"
 import reportRoutes from "../src/report/report.routes.js"
 import productRoutes from "../src/product/product.routes.js";
 import exhangeRoutes from "../src/exchange/exchange.routes.js";
+import { swaggerDocs, swaggerUi } from "./swagger.js";
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -31,6 +32,7 @@ const routes = (app) => {
   app.use("/DBB/v1/report", reportRoutes);
   app.use("/DBB/v1/products", productRoutes);
   app.use("/DBB/v1/exchange", exhangeRoutes);
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 };
 
 const conectarDB = async () => {
