@@ -2,24 +2,44 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
 const options = {
-    swaggerDefinition:{
+    definition: {
         openapi: "3.0.0",
-        info:{
-            titulo: "Proyecto bimestal 3",
+        info: {
+            title: "Deep Blue Bank API",
             version: "1.0.0",
-            descripcion: "Api para la gestion de un banco",
-            contacto:{
-                nombre: "Developers",
-                correo: "lxocoy-2023020@kinal.edu.gt"
+            description: "API para la gestión completa de un sistema bancario",
+            contact: {
+                name: "Developers Team",
+                email: "lxocoy-2023020@kinal.edu.gt"
             }
         },
-        servers:[
+        servers: [
             {
-                url: "https://backenddbb.vercel.app/DBB/v1"
+                url: "https://backenddbb.vercel.app/DBB/v1",
+                description: "Servidor de Producción"
+            },
+            {
+                url: "http://localhost:3000/DBB/v1",
+                description: "Servidor de Desarrollo"
+            }
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                    description: "Token JWT obtenido del endpoint de login"
+                }
+            }
+        },
+        security: [
+            {
+                bearerAuth: []
             }
         ]
     },
-    apis:[
+    apis: [
         "./src/accounts/accounts.routes.js",
         "./src/auth/auth.routes.js",
         "./src/exchange/exchange.routes.js",
@@ -28,8 +48,22 @@ const options = {
         "./src/product/product.routes.js",
         "./src/report/report.routes.js"
     ]
-}
+};
 
 const swaggerDocs = swaggerJSDoc(options);
 
-export {swaggerDocs, swaggerUi}
+// Configuración personalizada para Swagger UI
+const swaggerOptions = {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: "Deep Blue Bank API Documentation",
+    swaggerOptions: {
+        persistAuthorization: true,
+        displayRequestDuration: true,
+        docExpansion: "none",
+        filter: true,
+        showRequestHeaders: true,
+        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch']
+    }
+};
+
+export { swaggerDocs, swaggerUi, swaggerOptions };
