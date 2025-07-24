@@ -13,7 +13,7 @@ import movementsRoutes from "../src/movements/movements.routes.js"
 import reportRoutes from "../src/report/report.routes.js"
 import productRoutes from "../src/product/product.routes.js";
 import exhangeRoutes from "../src/exchange/exchange.routes.js";
-import { swaggerDocs, swaggerUi, swaggerOptions } from "./swagger.js";
+import { swaggerDocs, swaggerUi } from "./swagger.js";
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -22,8 +22,6 @@ const middlewares = (app) => {
   app.use(helmet());
   app.use(morgan("dev"));
   app.use(apiLimiter);
-  
-  app.use(express.static('public'));
 };
 
 const routes = (app) => {
@@ -34,18 +32,7 @@ const routes = (app) => {
   app.use("/DBB/v1/report", reportRoutes);
   app.use("/DBB/v1/products", productRoutes);
   app.use("/DBB/v1/exchange", exhangeRoutes);
-  
-  app.get("/api-docs/swagger.json", (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerDocs);
-  });
-  
-  app.get("/api-docs", (req, res) => {
-    res.sendFile('swagger.html', { root: './public' });
-  });
-  
-  app.use("/api-docs", swaggerUi.serve);
-  app.get("/docs", swaggerUi.setup(swaggerDocs, swaggerOptions));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 };
 
 const conectarDB = async () => {
