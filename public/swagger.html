@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Deep Blue Bank API Documentation" />
+    <title>Deep Blue Bank API Documentation</title>
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui.css" />
+    <style>
+        .swagger-ui .topbar {
+            display: none;
+        }
+        .swagger-ui .info {
+            margin: 20px 0;
+        }
+        .swagger-ui .scheme-container {
+            background: #fafafa;
+            padding: 10px;
+        }
+        body {
+            margin: 0;
+            background: #fafafa;
+        }
+        .custom-header {
+            background: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .custom-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .custom-header p {
+            margin: 5px 0 0 0;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-header">
+        <h1>🏦 Deep Blue Bank API</h1>
+        <p>Documentación completa de la API bancaria</p>
+    </div>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js" crossorigin></script>
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js" crossorigin></script>
+    <script>
+        window.onload = function() {
+            // Fetch the swagger spec from the API
+            fetch('/api-docs/swagger.json')
+                .then(response => response.json())
+                .then(spec => {
+                    SwaggerUIBundle({
+                        url: '/api-docs/swagger.json',
+                        dom_id: '#swagger-ui',
+                        deepLinking: true,
+                        presets: [
+                            SwaggerUIBundle.presets.apis,
+                            SwaggerUIStandalonePreset
+                        ],
+                        plugins: [
+                            SwaggerUIBundle.plugins.DownloadUrl
+                        ],
+                        layout: "StandaloneLayout",
+                        persistAuthorization: true,
+                        displayRequestDuration: true,
+                        docExpansion: "none",
+                        filter: true,
+                        showRequestHeaders: true,
+                        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                        tryItOutEnabled: true,
+                        requestInterceptor: (request) => {
+                            // Interceptar requests para agregar el Bearer token si existe
+                            const token = localStorage.getItem('swagger_token');
+                            if (token) {
+                                request.headers['Authorization'] = `Bearer ${token}`;
+                            }
+                            return request;
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading Swagger spec:', error);
+                    document.getElementById('swagger-ui').innerHTML = 
+                        '<div style="padding: 20px; text-align: center; color: red;">' +
+                        '<h2>Error loading API documentation</h2>' +
+                        '<p>Please check if the server is running and try again.</p>' +
+                        '</div>';
+                });
+        };
+    </script>
+</body>
+</html>
